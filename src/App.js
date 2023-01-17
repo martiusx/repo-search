@@ -1,11 +1,7 @@
 import Home from "./home";
 
 const App = function () {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+  return <Home />;
 };
 
 export default App;

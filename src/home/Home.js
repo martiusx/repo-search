@@ -1,5 +1,7 @@
+import MainSide from "./mainSide/MainSide";
+
 const Home = function () {
-  return <></>;
+  return <MainSide />;
 };
 
 export default Home;
