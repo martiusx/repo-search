@@ -1,13 +1,21 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import TableBody from "@mui/material/TableBody";
 import SingleSearchItem from "../../components/ui/SingleSearchItem";
 
-const MainSideTable = function () {
+const MainSideTable = function (props) {
+  const fullData = props.data;
+  const dataElements = fullData.map((el) => ({
+    id: el.id,
+    repName: el.name,
+    owner: el.owner.id,
+    stars: el.score,
+    date: el.created_at,
+  }));
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -21,7 +29,20 @@ const MainSideTable = function () {
             <TableCell align="left">Ulubione</TableCell>
           </TableRow>
         </TableHead>
-        <SingleSearchItem />
+        <TableBody>
+          {dataElements.map((el, index) => {
+            return (
+              <SingleSearchItem
+                key={index}
+                id={el.id}
+                name={el.repName}
+                owner={el.owner}
+                stars={el.stars}
+                createData={el.date}
+              />
+            );
+          })}
+        </TableBody>
       </Table>
     </TableContainer>
   );

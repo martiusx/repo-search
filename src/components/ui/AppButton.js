@@ -5,7 +5,7 @@ const AppButton = function (props) {
   return (
     <Box sx={{ "& button": { m: 1 } }}>
       <div>
-        <Button variant="contained" size="large">
+        <Button variant="contained" size="large" onClick={props.clickHandler}>
           {props.buttonText}
         </Button>
       </div>
