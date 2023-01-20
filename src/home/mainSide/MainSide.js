@@ -1,18 +1,19 @@
-import MainSideTable from "./MainSideTable";
 import MainSideSearch from "./MainSideSearch";
 import MainSideResultsPerPage from "./MainSideResultsPerPage";
-import AppButton from "../../components/ui/AppButton";
+import { useState } from "react";
 
 const MainSide = function () {
+  const [resPerPage, setResPerPage] = useState(15);
+
+  const handleChange = (e) => {
+    setResPerPage(e.target.value);
+  };
+
   return (
     <>
       <h1>Strona Główna</h1>
-      <MainSideSearch />
-      <MainSideResultsPerPage />
-      <div className="mainSide__buttons">
-        <AppButton buttonText="Poprzednia" />
-        <AppButton buttonText="Następna" />
-      </div>
+      <MainSideSearch resPerPage={resPerPage} />
+      <MainSideResultsPerPage onChange={handleChange} />
     </>
   );
 };

@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 
-const MainSideResultsPerPage = function () {
+const MainSideResultsPerPage = function (props) {
   return (
     <div className="mainSideResultsPerPage">
       <span>Wyników na stronę:</span>
@@ -13,6 +13,7 @@ const MainSideResultsPerPage = function () {
             inputProps={{
               id: "uncontrolled-native",
             }}
+            onChange={props.onChange}
           >
             <option value={5}>5</option>
             <option value={10}>10</option>

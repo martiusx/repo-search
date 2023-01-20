@@ -4,8 +4,8 @@ import { useState } from "react";
 import AppButton from "../../components/ui/AppButton";
 import MainSideTable from "./MainSideTable";
 
-const MainSideSearch = function () {
-  const [data, setData] = useState([]);
+const MainSideSearch = function ({ resPerPage }) {
+  const [data, setData] = useState(null);
   const [searchValue, onSearchChange] = useState("");
 
   const submitHandler = async (e) => {
@@ -22,9 +22,6 @@ const MainSideSearch = function () {
       });
   };
 
-  const dataValues = data.map((el) => {
-    return el;
-  });
   return (
     <>
       <div className="mainSideSearch">
@@ -39,9 +36,7 @@ const MainSideSearch = function () {
         />
         <AppButton buttonText="Szukaj" clickHandler={submitHandler} />
       </div>
-      <div>
-        <MainSideTable data={dataValues} />
-      </div>
+      <div>{data && <MainSideTable data={data} resPerPage={resPerPage} />}</div>
     </>
   );
 };
