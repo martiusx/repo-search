@@ -1,10 +1,15 @@
 import AppButton from "../../components/ui/AppButton";
+import { Link } from "react-router-dom";
 
 const Nav = function () {
   return (
     <nav>
-      <AppButton buttonText="Strona główna" />
-      <AppButton buttonText="Ulubione" />
+      <Link to="/">
+        <AppButton buttonText="Strona główna" />
+      </Link>
+      <Link to="/favourites">
+        <AppButton buttonText="Ulubione" />
+      </Link>
     </nav>
   );
 };
