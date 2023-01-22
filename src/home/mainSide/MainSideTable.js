@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -11,7 +11,22 @@ import ReactPaginate from "react-paginate";
 import AppButton from "../../components/ui/AppButton";
 
 const MainSideTable = function ({ data, resPerPage }) {
+  const [favorites, setFavorites] = useState([]);
+  const [favoritesIdArr, setFavoritesIdArr] = useState([]);
+
+  useEffect(() => {
+    const favoriteArr = JSON.parse(localStorage.getItem("favorites"));
+
+    if (favoriteArr !== null && favoriteArr !== "[]") {
+      setFavorites(favoriteArr);
+    }
+  }, []);
+
   const fullData = data;
+
+  const test = favorites.map((el) => {
+    return el.id;
+  });
   const dataElements = fullData.map((el) => ({
     id: el.id,
     repName: el.name,
@@ -25,7 +40,6 @@ const MainSideTable = function ({ data, resPerPage }) {
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = dataElements.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(dataElements.length / itemsPerPage);
-
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % dataElements.length;
     setItemOffset(newOffset);
@@ -49,12 +63,32 @@ const MainSideTable = function ({ data, resPerPage }) {
             currentItems.map((el, index) => {
               return (
                 <SingleSearchItem
+                  element={el}
                   key={index}
                   id={el.id}
                   name={el.repName}
                   owner={el.owner}
                   stars={el.stars}
                   createData={el.date}
+                  clickHandlerAdd={() => {
+                    if (!favoritesIdArr.includes(el.id, el)) {
+                      setFavoritesIdArr([el.id, ...favoritesIdArr]);
+                      setFavorites([el, ...favorites]);
+                      localStorage.setItem(
+                        "favorites",
+                        JSON.stringify(favorites)
+                      );
+                    } else {
+                      const x = favorites.filter((item) => item.id !== el.id);
+
+                      setFavoritesIdArr(
+                        favoritesIdArr.filter((val) => val !== el.id)
+                      );
+                      setFavorites(x);
+                      localStorage.setItem("favorites", JSON.stringify(x));
+                    }
+                  }}
+                  localArr={test}
                 />
               );
             })}
