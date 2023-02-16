@@ -1,0 +1,14 @@
+@import "./mainSideSearch";
+@import "./mainSideResultsPerPage";
+@import "./mainSideTable__paginate";
+
+.mainSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__buttons {
+    display: flex;
+  }
+}

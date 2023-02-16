@@ -1,0 +1,10 @@
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1vw 2vw;
+
+  &__element {
+    text-decoration: none;
+  }
+}
